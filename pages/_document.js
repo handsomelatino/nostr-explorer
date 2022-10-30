@@ -5,8 +5,9 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" type="image/png" href="/favicon.png"/>
-          {/* <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" /> */}
+          <link rel="icon" type="image/png" href="/favicon.png" />
+          <link rel="preconnect" href="https://fonts.bunny.net" />
+          <link href="https://fonts.bunny.net/css?family=inconsolata:400,500,800|inter:400,500,700" rel="stylesheet" />
         </Head>
         <body>
           <Main />
