@@ -1,14 +1,12 @@
-import Document, {Html, Head, Main, NextScript} from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
     return (
       <Html>
         <Head>
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css"
-          />
+          <link rel="icon" type="image/png" href="/favicon.png"/>
+          {/* <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" /> */}
         </Head>
         <body>
           <Main />

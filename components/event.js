@@ -4,6 +4,7 @@ import {kindNames} from '../utils/nostr'
 import Content from './content'
 import Tags from './tags'
 import {hexToNpub} from '../utils/nostr'
+import Link from 'next/link'
 
 export default function Event({id, event}) {
   const [showingRaw, showRaw] = useState(false)
@@ -25,12 +26,14 @@ export default function Event({id, event}) {
 
         <div className="nes-field is-inline">
           <label htmlFor={`pubkey-${sid}`}>author (pubkey)</label>
-          <input
+          {/* <a href= */}
+          <Link href={`/p/${hexToNpub(event.pubkey)}`}>{ showingHex ? event.pubkey : hexToNpub(event.pubkey) }</Link>
+          {/* <input
             readOnly
             id={`pubkey-${sid}`}
             value={showingHex ? event.pubkey : hexToNpub(event.pubkey)}
             className="nes-input nes-text is-primary"
-          />
+          /> */}
           <button
             type="button"
             className="nes-btn is-warning"
@@ -59,6 +62,7 @@ export default function Event({id, event}) {
             readOnly
             id={`date-${sid}`}
             value={new Date(event.created_at * 1000)}
+            // value={new Date(event.created_at * 1000).toUTCString()}
             className="nes-input"
           />
         </div>

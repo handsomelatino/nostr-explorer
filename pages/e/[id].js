@@ -2,10 +2,11 @@ import Head from 'next/head'
 
 import {getEvent} from '../../utils/get-event'
 import Event from '../../components/event'
+import EventDetails from '../../components/EventDetails/EventDetails'
 
 export async function getServerSideProps(context) {
-  const id = context.params.id
-  const event = await getEvent(id)
+  const { id } = context.params;
+  const event = await getEvent(id);
 
   if (event) {
     // event exists, cache forever
@@ -16,18 +17,15 @@ export async function getServerSideProps(context) {
     context.res.setHeader('Cache-Control', 'public, s-maxage=360')
   }
 
-  return {
-    props: {id, event}
-  }
+  return { props: { id, event } };
 }
 
 export default function EventPage({id, event}) {
   return (
     <>
-      <Head>
-        <title>Nostr Event {id}</title>
-      </Head>
-      <Event id={id} event={event} />
+      <Head><title>Nostr Event – {id}</title></Head>
+      {/* <Event id={id} event={event} /> */}
+      <EventDetails id={id} event={event} />
     </>
   )
 }

@@ -1,0 +1,52 @@
+.landingPage {
+  background-color: var(--purple-darkest);
+  color: white;
+}
+
+.aboveTheFold {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-around;
+  padding: 12px;
+  background: radial-gradient(37.74% 44.14% at 15% 23.27%, rgba(226, 20, 20, 0.2) 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(35.77% 49.69% at 100% 72.89%, rgba(0, 197, 197, 0.2) 0%, rgba(24, 24, 24, 0) 100%), #1E1D1D;
+  margin: 40px auto 0;
+
+  h1 {
+    color: white;
+    font-size: 80px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 60px;
+    margin-top: 10vh;
+
+    strong {
+      color: var(--orange);
+      display: block;
+      font-size: 54px;
+    }
+  }
+
+  .searchBar {
+    width: 520px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .decentralized {
+    max-width: 400px;
+    margin: 0 auto;
+
+    h2 {
+      text-align: center;
+      margin: 20px 0 48px;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 36px;
+      text-align: justify;
+    }
+  }
+}

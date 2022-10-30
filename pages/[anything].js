@@ -1,11 +1,13 @@
-import {npubToHex} from '../utils/nostr'
+import { npubToHex } from '../utils/nostr';
 
 export async function getServerSideProps(context) {
   let destination
   try {
-    let pubkey = npubToHex(context.params.anything)
-    console.log(pubkey)
-    destination = `/p/${pubkey}`
+    let pubkey = npubToHex(context.params.anything);
+    console.log(pubkey);
+    destination = `/p/${pubkey}`;
+    // console.log('hextonpub:', hexToNpub(context.params.anything))
+    // let pubkey = context.params.anything
   } catch (_) {
     if (context.params.anything.toLowerCase().match(/[a-f0-9]{64}/)) {
       let id = context.params.anything
@@ -14,7 +16,7 @@ export async function getServerSideProps(context) {
   }
   if (destination) {
     return {
-      redirect: {destination, permanent: false}
+      redirect: { destination, permanent: false }
     }
   } else {
     return {

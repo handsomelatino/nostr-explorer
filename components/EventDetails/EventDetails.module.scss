@@ -1,0 +1,198 @@
+.eventDetails {
+  background-color: var(--gray-1);
+  min-height: 100vh;
+  color: white;
+}
+
+.innerContainer {
+  padding-top: 120px;
+  margin: 0 auto;
+  max-width: 960px;
+  padding-bottom: 40px;
+}
+
+code.hash {
+  font-size: 20px;
+  color: var(--gray-c);
+  font-weight: 500;
+}
+
+.title {
+  display: flex;
+  gap: 32px;
+  align-items:flex-end;
+  justify-content: space-between;
+
+  h2 {
+    font-size: 42px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 42px;
+  }
+}
+
+.outlineButton {
+  align-items: center;
+  border: 1px solid var(--orange);
+  border-radius: 8px;
+  color: var(--orange);
+  display: inline-flex;
+  padding: 6px 0;
+  gap: 8px;
+  min-width: 104px;
+  justify-content: center;
+  transition: 0.3s filter;
+  text-decoration: none;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.2) saturate(1.1);
+  }
+
+  &:disabled {
+    background-color: unset;
+  }
+
+  &.error {
+    color: var(--red);
+    border-color: var(--red);
+  }
+
+  > svg {
+    width: auto;
+    height: 20px;
+    fill: var(--orange);
+  }
+}
+
+.verification {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 8px 4px;
+  color: var(--gray-7);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  
+  &.error {
+    color: var(--red);
+  }
+}
+
+.eventInfo {
+  background-color: var(--purple-dark);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 20px;
+
+  .authorRow {
+    display: flex;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    
+    .label {
+      font-weight: 500;
+    }
+  }
+
+  .infoRow {
+    background-color: var(--purple-dark-2);
+    border-radius: 16px;
+    padding: 16px;
+
+    .label {
+      font-weight: 500;
+    }
+  }
+}
+
+.help {
+  display: inline-flex;
+  border-radius: 100%;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-inline-start: 6px;
+  transition: 0.3s filter;
+  font-size: 16px;
+  vertical-align: text-bottom;
+
+  &:hover {
+    filter: brightness(1.2) saturate(1.1);
+  }
+}
+
+.pubkeyLink {
+  display: inline-block;
+  margin-inline-start: 8px;
+
+  > svg {
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+    fill: var(--orange);
+    transition: 0.3s filter;
+  }
+
+  > svg {
+    &:hover {
+      filter: brightness(1.2) saturate(1.1);
+    }
+  }
+}
+
+.json {
+  background-color: var(--purple-dark);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 32px;
+  max-height: 480px;
+  overflow: auto;
+  
+  pre {
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0;
+    user-select: contain; /* Not supported yet. Coming soon™️ to CSS UI4 */
+    
+    code {
+      white-space: pre;
+    }
+  }
+}
+
+.copyJson {
+  color: var(--orange);
+  transition: 0.3s filter;
+  margin-inline-end: 24px;
+  padding: 8px;
+  display: inline-block;
+  min-width: 64px;
+  text-align: center;
+
+  &:hover {
+    filter: brightness(1.2) saturate(1.1);
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.secondaryTitle {
+  margin-top: 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  h3 {
+    display: inline;
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+}

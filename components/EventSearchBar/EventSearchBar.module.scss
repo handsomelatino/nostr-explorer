@@ -1,0 +1,35 @@
+
+.search {
+  background-color: rgba(black, 0.2);
+  border: 1px solid rgba(white, 0.1);
+  border-radius: 64px;
+  display: flex;
+  padding: 4px;
+
+  button {
+    background: var(--blue-dark);
+    border: 2px solid var(--blue);
+    border-radius: 64px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 16px;
+    transition: 0.3s filter;
+    color: white;
+    
+    &:hover {
+      filter: brightness(1.2) saturate(1.1);
+    }
+  }
+
+  input {
+    all: unset;
+    margin: 4px 12px 4px 20px;
+    flex: 1;
+    font-size: 14px;
+
+    &:placeholder-shown {
+      text-overflow: ellipsis;
+    }
+  }
+}

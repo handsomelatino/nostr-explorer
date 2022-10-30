@@ -1,0 +1,76 @@
+@import url(https://fonts.bunny.net/css?family=inconsolata:400,500,800|inter:400,500,700);
+
+html {  
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(144, 140, 124);
+  color: rgb(0, 0, 0);
+  line-height: 1.5; /* inherited from nes.css <- TODO remoe it? */
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+button {
+  all: unset;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+*:not(:disabled)[role=button] {
+  cursor: pointer;
+}
+
+img {
+  vertical-align: middle;
+}
+
+code, pre {
+  font-family: 'Inconsolata', monospace;
+}
+
+.id {
+  font-size: 13px !important;
+}
+
+.content {
+  margin: 1.5rem auto !important;
+}
+
+.show-raw-button {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.raw {
+  padding: 22px;
+}
+
+.nes-field {
+  margin: 10px 0;
+}
+
+.is-icon,
+.is-icon > * {
+  width: auto !important;
+}

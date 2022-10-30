@@ -5,6 +5,7 @@ export default function Content({event}) {
     case 0: {
       try {
         const metadata = JSON.parse(event.content)
+
         return (
           <div className="nes-container">
             <div className="nes-field is-inline">

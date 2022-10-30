@@ -1,18 +1,20 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4040",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "bech32": "^2.0.0",
-    "nes.css": "^2.3.0",
+    "classnames": "^2.3.2",
+    "luxon": "^3.0.4",
     "next": "12.1.4",
     "nostr-tools": "^0.24.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "sass": "^1.55.0",
     "ws": "^8.8.0"
   },
   "devDependencies": {

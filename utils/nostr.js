@@ -1,13 +1,24 @@
-import {bech32} from 'bech32'
+import { bech32 } from 'bech32'
 
-export const kindNames = [
-  /* 0: */ 'profile metadata',
-  /* 1: */ 'text note',
-  /* 2: */ 'relay recommendation',
-  /* 3: */ 'contact list',
-  /* 4: */ 'encrypted direct message',
-  /* 5: */ 'event deletion'
-]
+// export const kindNames = [
+//   /* 0: */ 'profile metadata',
+//   /* 1: */ 'text note',
+//   /* 2: */ 'relay recommendation',
+//   /* 3: */ 'contact list',
+//   /* 4: */ 'encrypted direct message',
+//   /* 5: */ 'event deletion',
+// ]
+
+export const kindNames = {
+  0  : 'profile metadata',
+  1  : 'text note',
+  2  : 'relay recommendation',
+  3  : 'contact list',
+  4  : 'encrypted direct message',
+  5  : 'event deletion',
+  40 : 'Channel Creation',
+  42 : 'Channel message',
+}
 
 export const relays = [
   'wss://nostr-pub.wellorder.net',
@@ -25,7 +36,7 @@ export const relays = [
 
 export function nip05toURL(identifier) {
   const [name, domain] = identifier.split('@')
-  return `https://${domain}/.well-known/nostr.json?name=${name}`
+  return domain ? `https://${domain}/.well-known/nostr.json?name=${name}` : `https://${identifier}`
 }
 
 export function npubToHex(npub) {
