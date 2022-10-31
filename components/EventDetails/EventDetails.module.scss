@@ -216,6 +216,26 @@ code.hash {
   }
 }
 
+.postedChannel {
+  font-style: italic;
+  color: var(--gray-7);
+  font-size: 20px;
+
+  a {
+    text-decoration: none;
+    color: var(--orange);
+    transition: 0.3s filter;
+
+    &:hover {
+      // text-decoration: underline;
+      filter: brightness(1.2) saturate(1.1);
+
+      > svg {
+      }
+    }
+  }
+}
+
 .jsonTag {
   font-size: 15px;
   font-weight: bold;

@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import classNames from 'classnames';
 import { DateTime } from 'luxon';
-import { hexToNpub, kindNames } from '../../utils/nostr';
+import { hexToNpub, EventNames } from '../../utils/nostr';
 
 import EventTags from './EventTags';
 
@@ -9,7 +10,7 @@ import SignatureIcon from '../../assets/icons/SignatureIcon';
 import IconLink from '../layout/IconLink/IconLink';
 import styles from './EventDetails.module.scss';
 
-export default function EventDetails({ id, event }) {
+export default function EventDetails({ id, event, channelEvent }) {
 
   const [verifying, setVerifying] = useState(false);
   const [signatureValid, setSignatureValid] = useState(null);
@@ -135,7 +136,7 @@ export default function EventDetails({ id, event }) {
 
             <div>
               <span className={styles.label}>Type</span>
-              <span>{ kindNames[event.kind] || '' }</span>
+              <span>{ EventNames[event.kind] || '' }</span>
               <span className={styles.kindNumber}>{ event.kind }</span>
             </div>
           </div>
@@ -144,6 +145,7 @@ export default function EventDetails({ id, event }) {
         <section id='content'>
           <div className={styles.secondaryTitle}>
             <h3>Content</h3>
+            { channelEvent && <div className={styles.postedChannel}>Posted on channel <Link href={`/e/${channelEvent.id}`} passHref><a>«{ channelEvent.__content.name }»<IconLink /></a></Link></div> }
           </div>
           <div className={classNames(styles.content, { [styles.isJson]: eventContentJson })}>
           { renderEventContent() }

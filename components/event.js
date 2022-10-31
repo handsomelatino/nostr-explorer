@@ -1,10 +1,8 @@
-import {useState} from 'react'
-
-import {kindNames} from '../utils/nostr'
-import Content from './content'
-import Tags from './tags'
-import {hexToNpub} from '../utils/nostr'
-import Link from 'next/link'
+import { useState } from 'react';
+import Link from 'next/link';
+import { EventNames, hexToNpub } from '../utils/nostr';
+import Content from './content';
+import Tags from './tags';
 
 export default function Event({id, event}) {
   const [showingRaw, showRaw] = useState(false)
@@ -52,7 +50,7 @@ export default function Event({id, event}) {
           <input
             readOnly
             id={`kind-${sid}`}
-            value={(kindNames[event.kind] || '').toUpperCase()}
+            value={(EventNames[event.kind] || '').toUpperCase()}
             className="nes-input"
           />
         </div>

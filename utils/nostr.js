@@ -1,6 +1,21 @@
 import { bech32 } from 'bech32';
 
-export const kindNames = {
+export const EventKinds = {
+  METADATA                  : 0,
+  TEXT                      : 1,
+  RECOMMEND_RELAY           : 2,
+  CONTACTS                  : 3,
+  ENCRYPTED_DIRECT_MESSAGES : 4,
+  EVENT_DELETION            : 5,
+  REACTION                  : 7,
+  CHANNEL_CREATION          : 40,
+  CHANNEL_METADATA          : 41,
+  CHANNEL_MESSAGE           : 42,
+  CHANNEL_HIDE_MESSAGE      : 43,
+  CHANNEL_MUTE_USER         : 44,
+}
+
+export const EventNames = {
   0  : 'Profile Metadata',
   1  : 'Text Note',
   2  : 'Relay Recommendation',

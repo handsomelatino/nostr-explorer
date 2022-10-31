@@ -9,7 +9,10 @@
     fill: var(--orange);
     transition: 0.3s filter;
   }
+}
 
+// Only show hover effects if href exists:
+a.linkIcon {
   > svg {
     &:hover {
       filter: brightness(1.2) saturate(1.1);
