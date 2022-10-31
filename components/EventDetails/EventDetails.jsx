@@ -56,7 +56,7 @@ export default function EventDetails({ id, event }) {
   }
 
   const jsonData = `data:text/plain;charset=UTF-8,${encodeURIComponent(eventJson)}`;
-  const jsonName = `nostr_event_${id.slice(0, 8)}_json.txt`;
+  const jsonName = `nostr_event_${id.slice(0, 8)}.json`;
 
   const timeAgo = d => {
     let time;
@@ -107,13 +107,13 @@ export default function EventDetails({ id, event }) {
           <h2>Event</h2>
           <code className={styles.hash}>{ id }</code>
           <button className={classNames(styles.outlineButton, { [styles.error]: signatureValid === false })} onClick={verifySignature} disabled={verifying || signatureValid !== null}>{ renderVerify() }</button>
+          <div className={classNames(styles.verification, { [styles.invisible]: signatureValid === null, [styles.error]: signatureValid === false })}>
+            { signatureValid
+            ? <>Verified in { (verifyTime / 1000).toFixed(verifyTime >= 10 ? 2 : 4) }s</>
+            : <>This event is malformed or may have been tampered with. Do not trust its content.</>
+            }
+          </div>
         </div>
-        { <div className={classNames(styles.verification, { [styles.invisible]: signatureValid === null, [styles.error]: signatureValid === false })}>
-          { signatureValid
-          ? <>Verified in { (verifyTime / 1000).toFixed(verifyTime >= 10 ? 2 : 4) }s</>
-          : <>This event is malformed or may have been tampered with. Do not trust its content.</>
-          }
-        </div> }
 
         <section className={styles.eventInfo}>
           <div className={styles.authorRow}>

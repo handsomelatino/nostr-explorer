@@ -28,7 +28,7 @@ export default function EventTags({ event }) {
     const showLink = is256hex(item) && ['e', 'p'].includes(type) ? renderLink : null;
 
     return (
-      <div>{ renderItem } { showLink}</div>
+      <>{ renderItem } { showLink}</>
     )
   }
 

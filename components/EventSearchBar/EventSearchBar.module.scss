@@ -16,9 +16,31 @@
     padding: 4px 16px;
     transition: 0.3s filter;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
       filter: brightness(1.2) saturate(1.1);
+    }
+
+    > svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+      display: none;
+    }
+
+    @media (max-width: 1022px) {
+      padding: 4px 12px;
+
+      .searchText {
+        display: none;
+      }
+
+      > svg {
+        display: block;
+      }
     }
   }
 

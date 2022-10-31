@@ -23,7 +23,12 @@
 .logo {
   display: flex;
   padding: 8px 0;
-  width: 320px;
+  width: 20vw;
+  max-width: 320px;
+
+  @media (max-width: 992px) {
+    width: unset;
+  }
 
   a {
     color: white;
@@ -48,11 +53,12 @@
   img {
     width: 32px;
     height: 32px;
-    // border: 1px solid white;
     image-rendering: pixelated;
-    // border-radius: 4px;
     margin-inline-end: 8px;
     transition: 0.3s transform;
+    // New image logo already includes border and radius
+    // border: 1px solid white;
+    // border-radius: 4px;
   }
 
   h1 {
@@ -64,12 +70,22 @@
     strong {
       color: var(--orange);
     }
+
+    @media (max-width: 574px) {
+      display: none;
+    }
   }
 }
 
 .search {
   padding: 6px 0;
-  width: 400px;
+  width: 32vw;
+  max-width: 400px;
+
+  @media (max-width: 766px) {
+    flex: 1;
+    width: unset;
+  }
 }
 
 .eventShortcuts {
@@ -84,6 +100,17 @@
   font-weight: bold;
   font-size: 15px;
   position: relative;
+
+  @media (max-width: 766px) {
+    display: none;
+  }
+
+  @media (max-width: 990px) {
+    gap: 24px;
+    font-size: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
   a {
     color: var(--gray-c);

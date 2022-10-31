@@ -21,8 +21,6 @@ h1, h2, h3 {
 
 *, *:after, *:before {
   box-sizing: border-box;
-  word-wrap: break-word;
-  word-break: break-word;
 }
 
 button {
@@ -44,31 +42,16 @@ img {
 code, pre {
   font-family: 'Inconsolata', monospace;
   margin: 0;
+
+  @media (max-width: 574px) {
+    word-break: break-word;
+  }
 }
 
-.id {
-  font-size: 13px !important;
-}
-
-.content {
-  margin: 1.5rem auto !important;
-}
-
-.show-raw-button {
-  margin-top: 22px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.raw {
-  padding: 22px;
-}
-
-.nes-field {
-  margin: 10px 0;
-}
-
-.is-icon,
-.is-icon > * {
-  width: auto !important;
-}
+/* 
+media queries used
+1022px (1024px) <- search bar change to icon
+990px (992px)   <- large devices
+764px (768px)   <- tablets etc
+574px (576px)   <- small devices
+*/

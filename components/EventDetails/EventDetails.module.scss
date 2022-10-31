@@ -5,10 +5,9 @@
 }
 
 .innerContainer {
-  padding-top: 120px;
   margin: 0 auto;
-  max-width: 960px;
-  padding-bottom: 40px;
+  max-width: 980px;
+  padding: 120px 8px 40px;
 }
 
 code.hash {
@@ -19,9 +18,11 @@ code.hash {
 
 .title {
   display: flex;
-  gap: 32px;
+  gap: 8px 32px;
   align-items:flex-end;
   justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
 
   h2 {
     font-size: 42px;
@@ -69,10 +70,10 @@ code.hash {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  margin: 8px 4px;
   color: var(--gray-7);
   text-align: right;
   font-variant-numeric: tabular-nums;
+  width: 100%;
   
   &.error {
     color: var(--red);
