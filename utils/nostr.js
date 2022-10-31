@@ -1,24 +1,19 @@
-import { bech32 } from 'bech32'
-
-// export const kindNames = [
-//   /* 0: */ 'profile metadata',
-//   /* 1: */ 'text note',
-//   /* 2: */ 'relay recommendation',
-//   /* 3: */ 'contact list',
-//   /* 4: */ 'encrypted direct message',
-//   /* 5: */ 'event deletion',
-// ]
+import { bech32 } from 'bech32';
 
 export const kindNames = {
-  0  : 'profile metadata',
-  1  : 'text note',
-  2  : 'relay recommendation',
-  3  : 'contact list',
-  4  : 'encrypted direct message',
-  5  : 'event deletion',
+  0  : 'Profile Metadata',
+  1  : 'Text Note',
+  2  : 'Relay Recommendation',
+  3  : 'Contact List',
+  4  : 'Encrypted Direct Message',
+  5  : 'Event Deletion',
+  7  : 'Reaction',
   40 : 'Channel Creation',
-  42 : 'Channel message',
-}
+  41 : 'Channel Metadata',
+  42 : 'Channel Message',
+  43 : 'Hide Channel Message',
+  44 : 'Mute Channel User',
+};
 
 export const relays = [
   'wss://nostr-pub.wellorder.net',
@@ -32,7 +27,7 @@ export const relays = [
   'wss://expensive-relay.fiatjaf.com',
   'wss://nostr-relay.freeberty.net',
   'wss://relay.minds.com/nostr/v1/ws'
-]
+];
 
 export function nip05toURL(identifier) {
   const [name, domain] = identifier.split('@')
@@ -51,4 +46,13 @@ export function npubToHex(npub) {
 
 export function hexToNpub(hex) {
   return bech32.encode('npub', bech32.toWords(Buffer.from(hex, 'hex')))
+}
+
+/**
+ * Verifies if a string is a 256-bit hex number, case-agnostic.
+ * @param {string} string
+ * @returns string
+ */
+export function is256hex(string) {
+  return string.match(/[A-Fa-f0-9]{64}/);
 }

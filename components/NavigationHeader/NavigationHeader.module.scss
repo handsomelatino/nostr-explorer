@@ -1,12 +1,13 @@
 .navigation {
   background-color: var(--purple-dark);
   color: white;
-  // position: sticky;
   position: fixed;
+  // position: sticky;
   top: 0;
   width: 100%;
-  padding: 10px 12px;
   z-index: 2;
+  // box-shadow: 2px 0 2px rgba(#25243E, 1);
+  box-shadow: 2px 0 6px 2px rgba(black, 0.3);
 }
 
 .innerContainer {
@@ -16,10 +17,13 @@
   width: 1200px;
   justify-content: space-between;
   align-items: center;
+  padding: 0 12px;
 }
 
 .logo {
   display: flex;
+  padding: 8px 0;
+  width: 320px;
 
   a {
     color: white;
@@ -59,6 +63,67 @@
   
     strong {
       color: var(--orange);
+    }
+  }
+}
+
+.search {
+  padding: 6px 0;
+  width: 400px;
+}
+
+.eventShortcuts {
+  background-color: var(--gray-1);
+  align-self: flex-end;
+  margin-top: 14px;
+  display: flex;
+  padding: 12px 32px 4px;
+  gap: 32px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  position: relative;
+
+  a {
+    color: var(--gray-c);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--orange);
+    }
+  }
+
+  .edge {
+    position: absolute;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    background-color: var(--gray-1);
+    
+    &.rightEdge {
+      left: -8px;
+    }
+
+    &.leftEdge {
+      right: -8px;
+    }
+  }
+
+  .edgeFilling {
+    position: absolute;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: var(--purple-dark);
+
+    &.rightEdge {
+      left: -16px;
+    }
+
+    &.leftEdge {
+      right: -16px;
     }
   }
 }

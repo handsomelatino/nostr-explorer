@@ -21,7 +21,6 @@ h1, h2, h3 {
 
 *, *:after, *:before {
   box-sizing: border-box;
-  white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-word;
 }
@@ -44,6 +43,7 @@ img {
 
 code, pre {
   font-family: 'Inconsolata', monospace;
+  margin: 0;
 }
 
 .id {

@@ -84,6 +84,7 @@ code.hash {
   border-radius: 16px;
   padding: 16px;
   margin-top: 20px;
+  font-size: 19px;
 
   .authorRow {
     display: flex;
@@ -92,18 +93,48 @@ code.hash {
     align-items: center;
     
     .label {
-      font-weight: 500;
+      font-weight: bold;
     }
   }
 
   .infoRow {
+    display: flex;
     background-color: var(--purple-dark-2);
     border-radius: 16px;
     padding: 16px;
+    align-items: center;
+    justify-content: space-between;
 
     .label {
-      font-weight: 500;
+      font-weight: bold;
+      margin-inline-end: 32px;
     }
+
+    .timeAgo {
+      font-style: italic;
+      color: var(--gray-c);
+      font-size: 17px;
+    }
+
+    .kindNumber {
+      display: inline-block;
+      background-color: var(--blue);
+      border-radius: 4px;
+      margin-inline-start: 16px;
+      padding: 0 12px;
+    }
+  }
+}
+
+.content {
+  background-color: var(--purple-dark);
+  border-radius: 16px;
+  padding: 24px 16px;
+  font-size: 18px;
+  white-space: pre-wrap;
+
+  &.isJson {
+    padding: 16px;
   }
 }
 
@@ -127,30 +158,16 @@ code.hash {
   }
 }
 
-.pubkeyLink {
-  display: inline-block;
-  margin-inline-start: 8px;
-
-  > svg {
-    vertical-align: baseline;
-    width: 20px;
-    height: 20px;
-    fill: var(--orange);
-    transition: 0.3s filter;
-  }
-
-  > svg {
-    &:hover {
-      filter: brightness(1.2) saturate(1.1);
-    }
-  }
+.tags {
+  background-color: var(--purple-dark);
+  border-radius: 16px;
+  padding: 24px 16px;
 }
 
 .json {
   background-color: var(--purple-dark);
   border-radius: 16px;
   padding: 16px;
-  margin-top: 32px;
   max-height: 480px;
   overflow: auto;
   
@@ -185,14 +202,26 @@ code.hash {
 }
 
 .secondaryTitle {
-  margin-top: 64px;
+  padding-top: 64px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  margin-bottom: 32px;
 
   h3 {
     display: inline;
     font-size: 24px;
     text-transform: uppercase;
   }
+}
+
+.jsonTag {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--blue);
+  color: white;
+  padding: 2px 8px;
+  display: inline-block;
+  border-radius: 4px;
+  margin-bottom: 16px;
 }

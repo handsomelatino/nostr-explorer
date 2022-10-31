@@ -1,0 +1,18 @@
+.linkIcon {
+  display: inline-block;
+  margin-inline-start: 8px;
+
+  > svg {
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+    fill: var(--orange);
+    transition: 0.3s filter;
+  }
+
+  > svg {
+    &:hover {
+      filter: brightness(1.2) saturate(1.1);
+    }
+  }
+}

@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import classNames from 'classnames';
-import Link from 'next/link';
-import { hexToNpub } from '../../utils/nostr';
-
-import LinkIcon from '../../assets/icons/LinkIcon';
-import SignatureIcon from '../../assets/icons/SignatureIcon';
-
-import styles from './EventDetails.module.scss';
 import { DateTime } from 'luxon';
+import { hexToNpub, kindNames } from '../../utils/nostr';
+
+import EventTags from './EventTags';
+
+import SignatureIcon from '../../assets/icons/SignatureIcon';
+import IconLink from '../layout/IconLink/IconLink';
+import styles from './EventDetails.module.scss';
 
 export default function EventDetails({ id, event }) {
 
@@ -15,6 +15,15 @@ export default function EventDetails({ id, event }) {
   const [signatureValid, setSignatureValid] = useState(null);
   const [verifyTime, setVerifyTime] = useState(null);
   const [copiedJson, setCopiedJson] = useState(false);
+
+  const eventContentJson = useMemo(() => {
+    try {
+      return (JSON.stringify(JSON.parse(event.content), null, 2));
+    }
+    catch {
+      return null;
+    }
+  }, [event]);
 
   const eventJson = useMemo(() => JSON.stringify(event, null, 2), [event]);
 
@@ -78,9 +87,22 @@ export default function EventDetails({ id, event }) {
   const createdAt = `${date.toISODate()} ${date.toLocaleString(DateTime.TIME_24_SIMPLE)}`;
   const relativeTime = timeAgo(date);
 
+  const renderEventContent = () => {
+    if (eventContentJson) {
+      return (
+        <>
+          <span className={styles.jsonTag}>JSON</span>
+          <pre><code>{ eventContentJson }</code></pre>
+        </>
+      )
+    }
+
+    return event.content;
+  }
+
   return (
     <main className={styles.eventDetails}>
-      <div className={styles.innerContainer}>
+      <div className={styles.innerContainer} id='event'>
         <div className={styles.title}>
           <h2>Event</h2>
           <code className={styles.hash}>{ id }</code>
@@ -101,20 +123,41 @@ export default function EventDetails({ id, event }) {
             </div>
             <div>
               <code className={styles.hash}>{ hexToNpub(event.pubkey) }</code>
-              <Link href={`/p/${hexToNpub(event.pubkey)}`} passHref>
-                <a className={styles.pubkeyLink}><LinkIcon /></a>
-              </Link>
+              <IconLink href={`/p/${hexToNpub(event.pubkey)}`} />
             </div>
           </div>
 
           <div className={styles.infoRow}>
-            Created
+            <div>
+              <span className={styles.label}>Created</span>
+              <span>{ createdAt } <span className={styles.timeAgo}>({relativeTime})</span></span>
+            </div>
 
-            { createdAt } ({relativeTime})
+            <div>
+              <span className={styles.label}>Type</span>
+              <span>{ kindNames[event.kind] || '' }</span>
+              <span className={styles.kindNumber}>{ event.kind }</span>
+            </div>
           </div>
         </section>
 
-        <section>
+        <section id='content'>
+          <div className={styles.secondaryTitle}>
+            <h3>Content</h3>
+          </div>
+          <div className={classNames(styles.content, { [styles.isJson]: eventContentJson })}>
+          { renderEventContent() }
+          </div>
+        </section>
+
+        <section id='tags'>
+          <div className={styles.secondaryTitle}>
+            <h3>Tags</h3>
+          </div>
+          <div className={styles.tags}><EventTags event={event} /></div>
+        </section>
+
+        <section id="json">
           <div className={styles.secondaryTitle}>
             <div>
               <h3>JSON</h3>

@@ -16,7 +16,7 @@ export default function EventSearchBar(props) {
 
   return (
     <form onSubmit={onSubmitSearch} className={styles.search}>
-      <input name="input" value={search} spellCheck={false} placeholder='Event hash or user/channel pubkey (npub)...' onChange={e => setSearch(e.target.value)} />
+      <input name="input" value={search} spellCheck={false} placeholder="Event hash or user 'npub' pubkey" onChange={e => setSearch(e.target.value)} />
       <button disabled={!search} type="submit" className="">SEARCH</button>
     </form>
   );

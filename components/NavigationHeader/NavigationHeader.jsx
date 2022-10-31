@@ -1,12 +1,21 @@
 import Link from "next/link";
+import classNames from "classnames";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import EventSearchBar from "../EventSearchBar/EventSearchBar";
 import styles from './NavigationHeader.module.scss';
 
+const EVENT_ANCHORS = [
+  { phrase: "Event",   link: "event" },
+  { phrase: "Content", link: "content" },
+  { phrase: "Tags",    link: "tags" },
+  { phrase: "JSON",    link: "json" },
+]
 export default function NavigationHeader(props) {
 
-  // const router = useRouter();
+  const router = useRouter();
+
+  const isEventPage = router.pathname === '/e/[id]';
 
   return (
     <header className={styles.navigation}>
@@ -20,7 +29,20 @@ export default function NavigationHeader(props) {
           </Link>
         </div>
 
-        <EventSearchBar />
+        { isEventPage && (
+          <div className={styles.eventShortcuts}>
+            { EVENT_ANCHORS.map(event => (
+              <a href={`#${event.link}`}>{ event.phrase }</a>
+            ))}
+            <div className={classNames(styles.edge, styles.leftEdge)} />
+            <div className={classNames(styles.edge, styles.rightEdge)} />
+
+            <div className={classNames(styles.edgeFilling, styles.leftEdge)} />
+            <div className={classNames(styles.edgeFilling, styles.rightEdge)} />
+          </div>
+        )}
+
+        <div className={styles.search}><EventSearchBar /></div>
       </div>
     </header>
   )
