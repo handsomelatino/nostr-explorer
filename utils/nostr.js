@@ -71,3 +71,7 @@ export function hexToNpub(hex) {
 export function is256hex(string) {
   return string.match(/[A-Fa-f0-9]{64}/);
 }
+
+export function shortenEventId(id, length = 6) {
+  return id.slice(0, length) + '...' + id.slice(-length);
+}

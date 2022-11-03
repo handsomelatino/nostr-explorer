@@ -7,7 +7,7 @@ import styles from './NavigationHeader.module.scss';
 
 const EVENT_ANCHORS = [
   { phrase: "Event",   link: "event" },
-  { phrase: "Content", link: "content" },
+  { phrase: "Details", link: "details" },
   { phrase: "Tags",    link: "tags" },
   { phrase: "JSON",    link: "json" },
 ]
@@ -32,7 +32,7 @@ export default function NavigationHeader(props) {
         { isEventPage && (
           <div className={styles.eventShortcuts}>
             { EVENT_ANCHORS.map(event => (
-              <a href={`#${event.link}`}>{ event.phrase }</a>
+              <a key={event.phrase} href={`#${event.link}`}>{ event.phrase }</a>
             ))}
             <div className={classNames(styles.edge, styles.leftEdge)} />
             <div className={classNames(styles.edge, styles.rightEdge)} />

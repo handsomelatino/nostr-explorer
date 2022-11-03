@@ -1,7 +1,12 @@
+.tags {
+  background-color: var(--purple-dark);
+  border-radius: 16px;
+  padding: 24px 16px;
+}
+
 .noTags {
   text-align: center;
   padding: 20px;
-  // border: 2px dashed var(--gray-7);
   border: 2px dashed rgba(white, 0.15);
   color: var(--gray-c);
   border-radius: 12px;

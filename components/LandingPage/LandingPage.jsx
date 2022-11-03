@@ -13,6 +13,15 @@ export default function LandingPage() {
           <p><strong>Nostr</strong> is a censorship-resistant, open protocol where information can take many shapes: social media interactions, chat, private messages, and much more.</p>
         </div>
       </section>
+
+      <div>
+        Sample Events
+        <ul>
+          <li>encryped DM: 4a887bf80ef12fdff7e22691a19b32f497dd0d0f46a4f8a92502f399b4c076da</li>
+          <li>reply channel chat: b2ea3ea43d2fd2873a9b3191a8e5fdef381ebf2a1c56ca909861fe9489671c65</li>
+          <li>my own encrypted DM: aaa2b9f0814a87d8ed5b5ad1cc543fec77386d75a9bf82fa80746eda48c5f565</li>
+        </ul>
+      </div>
     </main>
   );
 }

@@ -6,15 +6,17 @@ import { EventKinds } from '../../utils/nostr';
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
-  const event = await getEvent(id);
   let channelEvent = null;
+
+  const event = await getEvent(id);
 
   // TODO -> parse e tags correctly (this is deprecated but still used by anigma.io)
   if (event?.kind === EventKinds.CHANNEL_MESSAGE) {
-    const [_, channel] = event.tags?.[0] || [];
+    const eTags = event.tags.filter(tag => tag[0] === 'e');
+    const [, channel] = eTags?.[0] || [];
+
     if (channel) {
       channelEvent = await getEvent(channel);
-
       channelEvent.__content = JSON.parse(channelEvent.content);
     }
   }

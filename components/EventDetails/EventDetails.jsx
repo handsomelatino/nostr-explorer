@@ -1,14 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
-import { DateTime } from 'luxon';
-import { hexToNpub, EventNames } from '../../utils/nostr';
+import { hexToNpub, EventNames, shortenEventId } from '../../utils/nostr';
+import styles from './EventDetails.module.scss';
 
 import EventTags from './EventTags';
+import IconLink from '../layout/IconLink/IconLink';
 
 import SignatureIcon from '../../assets/icons/SignatureIcon';
-import IconLink from '../layout/IconLink/IconLink';
-import styles from './EventDetails.module.scss';
+import { getEventTime } from '../../utils/dateFormat';
 
 export default function EventDetails({ id, event, channelEvent }) {
 
@@ -16,6 +16,17 @@ export default function EventDetails({ id, event, channelEvent }) {
   const [signatureValid, setSignatureValid] = useState(null);
   const [verifyTime, setVerifyTime] = useState(null);
   const [copiedJson, setCopiedJson] = useState(false);
+  const [showJsonHelp, setShowJsonHelp] = useState(false);
+
+  useEffect(() => {
+    setVerifying(false);
+    setSignatureValid(null);
+  }, [event]);
+
+  const replyTo = useMemo(() => {
+    const eTags = event.tags.filter(tag => tag[0] === 'e');
+    return eTags?.[1]?.[1] || undefined;
+  }, [event]);
 
   const eventContentJson = useMemo(() => {
     try {
@@ -27,6 +38,13 @@ export default function EventDetails({ id, event, channelEvent }) {
   }, [event]);
 
   const eventJson = useMemo(() => JSON.stringify(event, null, 2), [event]);
+  const [createdAt, relativeTime] = useMemo(() => getEventTime(event.created_at), [event]);
+
+  if (!event) {
+    return (
+      <div>Event not found.</div>
+    )
+  }
 
   const renderVerify = () => {
     if (signatureValid) {
@@ -59,35 +77,6 @@ export default function EventDetails({ id, event, channelEvent }) {
   const jsonData = `data:text/plain;charset=UTF-8,${encodeURIComponent(eventJson)}`;
   const jsonName = `nostr_event_${id.slice(0, 8)}.json`;
 
-  const timeAgo = d => {
-    let time;
-
-    const ranges = ['years', 'months', 'days', 'hours'];
-    const diff = DateTime.now().diff(d, ranges);
-
-    ranges.some(range => {
-      const value = Math.floor(diff.values[range]);
-
-      if (value === 1) {
-        // TODO -> use real locale instead of splitting the last 's'
-        time = `one ${range.slice(0, -1)} ago`;
-        return true;
-      }
-      else if (value > 1) {
-        time = `${value} ${range} ago`;
-        return true;
-      }
-
-      return false;
-    });
-
-    return time;
-  }
-
-  const date = DateTime.fromSeconds(event.created_at);
-  const createdAt = `${date.toISODate()} ${date.toLocaleString(DateTime.TIME_24_SIMPLE)}`;
-  const relativeTime = timeAgo(date);
-
   const renderEventContent = () => {
     if (eventContentJson) {
       return (
@@ -111,44 +100,47 @@ export default function EventDetails({ id, event, channelEvent }) {
           <div className={classNames(styles.verification, { [styles.invisible]: signatureValid === null, [styles.error]: signatureValid === false })}>
             { signatureValid
             ? <>Verified in { (verifyTime / 1000).toFixed(verifyTime >= 10 ? 2 : 4) }s</>
-            : <>This event is malformed or may have been tampered with. Do not trust its content.</>
+            : <>This event is malformed or may have been tampered with. Do not trust any part of its content.</>
             }
           </div>
         </div>
 
-        <section className={styles.eventInfo}>
-          <div className={styles.authorRow}>
-            <div className={styles.label}>
-              Author Pubkey
-              <div className={styles.help}><span>?</span></div>
-            </div>
-            <div>
-              <code className={styles.hash}>{ hexToNpub(event.pubkey) }</code>
-              <IconLink href={`/p/${hexToNpub(event.pubkey)}`} />
-            </div>
+        <section id='content'>
+          <div className={classNames(styles.content, { [styles.isJson]: eventContentJson, [styles.isText]: !eventContentJson })}>
+            { !eventContentJson && <div className={styles.openQuotation}>“ </div> }
+            { renderEventContent() }
           </div>
-
-          <div className={styles.infoRow}>
-            <div>
-              <span className={styles.label}>Created</span>
-              <span>{ createdAt } <span className={styles.timeAgo}>({relativeTime})</span></span>
-            </div>
-
-            <div>
-              <span className={styles.label}>Type</span>
-              <span>{ EventNames[event.kind] || '' }</span>
-              <span className={styles.kindNumber}>{ event.kind }</span>
-            </div>
-          </div>
+          { channelEvent && <div className={styles.postedChannel}>Posted { replyTo && <span className={styles.inResponse}>in response to message <Link href={`/e/${replyTo}`} passHref><a>{ shortenEventId(replyTo) }<IconLink size='small' /></a></Link></span> } on channel <Link href={`/e/${channelEvent.id}`} passHref><a>«{ channelEvent.__content.name }»<IconLink size='small' /></a></Link></div> }
         </section>
 
-        <section id='content'>
+        <section id='details'>
           <div className={styles.secondaryTitle}>
-            <h3>Content</h3>
-            { channelEvent && <div className={styles.postedChannel}>Posted on channel <Link href={`/e/${channelEvent.id}`} passHref><a>«{ channelEvent.__content.name }»<IconLink /></a></Link></div> }
+            <h3>Details</h3>
           </div>
-          <div className={classNames(styles.content, { [styles.isJson]: eventContentJson })}>
-          { renderEventContent() }
+          <div className={styles.eventInfo}>
+            <div className={styles.authorRow}>
+              <div className={styles.label}>
+                Author Pubkey
+                <div className={styles.help}><span>?</span></div>
+              </div>
+              <div>
+                <code className={styles.hash}>{ hexToNpub(event.pubkey) }</code>
+                <IconLink href={`/p/${hexToNpub(event.pubkey)}`} />
+              </div>
+            </div>
+
+            <div className={styles.infoRow}>
+              <div>
+                <span className={styles.label}>Created</span>
+                <span>{ createdAt } <span className={styles.timeAgo}>({relativeTime})</span></span>
+              </div>
+
+              <div>
+                <span className={styles.label}>Type</span>
+                <span>{ EventNames[event.kind] || '' }</span>
+                <span className={styles.kindNumber}>{ event.kind }</span>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -156,14 +148,14 @@ export default function EventDetails({ id, event, channelEvent }) {
           <div className={styles.secondaryTitle}>
             <h3>Tags</h3>
           </div>
-          <div className={styles.tags}><EventTags event={event} /></div>
+          <EventTags event={event} />
         </section>
 
         <section id="json">
-          <div className={styles.secondaryTitle}>
+          <div className={classNames(styles.secondaryTitle, {[styles.showingJsonHelp]: showJsonHelp })}>
             <div>
               <h3>JSON</h3>
-              <div className={styles.help}><span>?</span></div>
+              <div className={styles.help} role="button" onClick={() => setShowJsonHelp(!showJsonHelp)}><span>?</span></div>
             </div>
 
             <div>
@@ -172,6 +164,9 @@ export default function EventDetails({ id, event, channelEvent }) {
             </div>
           </div>
 
+          <div className={styles.jsonHelp}>
+            { showJsonHelp && <>JSON is an open-standard format for information exchange that is easy for both computers and humans to understand. Nostr events are exchanged using JSON between relays and clients. <span role='button' onClick={() => setShowJsonHelp(false)}>Hide</span></> }
+          </div>
           <div className={styles.json}>
             <pre><code>{ eventJson }</code></pre>
           </div>

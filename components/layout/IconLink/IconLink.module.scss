@@ -9,6 +9,15 @@
     fill: var(--orange);
     transition: 0.3s filter;
   }
+
+  &.size-small {
+    margin-inline-start: 6px;
+    
+    > svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 
 // Only show hover effects if href exists:

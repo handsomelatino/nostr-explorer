@@ -130,12 +130,28 @@ code.hash {
 .content {
   background-color: var(--purple-dark);
   border-radius: 16px;
-  padding: 24px 16px;
   font-size: 18px;
+  padding: 32px 16px;
+  position: relative;
   white-space: pre-wrap;
+
+  &.isText {
+    padding-inline-start: 52px;
+    word-break: break-word;
+  }
 
   &.isJson {
     padding: 16px;
+  }
+
+  .openQuotation {
+    font-size: 72px;
+    line-height: 72px;
+    font-family: 'Times New Roman', Times, serif;
+    left: 8px;
+    opacity: 0.3;
+    position: absolute;
+    top: 2px;
   }
 }
 
@@ -157,12 +173,6 @@ code.hash {
   &:hover {
     filter: brightness(1.2) saturate(1.1);
   }
-}
-
-.tags {
-  background-color: var(--purple-dark);
-  border-radius: 16px;
-  padding: 24px 16px;
 }
 
 .json {
@@ -198,6 +208,25 @@ code.hash {
   }
 }
 
+.jsonHelp {
+  max-width: 760px;
+  font-style: italic;
+  color: var(--gray-7);
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 16px;
+
+  span[role=button] {
+    color: var(--orange);
+    font-weight: 500;
+    transition: 0.3s filter;
+
+    &:hover {
+      filter: brightness(1.2) saturate(1.1);
+    }
+  }
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -214,12 +243,22 @@ code.hash {
     font-size: 24px;
     text-transform: uppercase;
   }
+
+  &.showingJsonHelp {
+    margin-bottom: 16px;
+  }
 }
 
 .postedChannel {
-  font-style: italic;
   color: var(--gray-7);
-  font-size: 20px;
+  font-style: italic;
+  font-size: 18px;
+  margin-top: 12px;
+  text-align: right;
+
+  .inResponse {
+    margin-inline-end: 4px;
+  }
 
   a {
     text-decoration: none;
@@ -227,11 +266,7 @@ code.hash {
     transition: 0.3s filter;
 
     &:hover {
-      // text-decoration: underline;
       filter: brightness(1.2) saturate(1.1);
-
-      > svg {
-      }
     }
   }
 }

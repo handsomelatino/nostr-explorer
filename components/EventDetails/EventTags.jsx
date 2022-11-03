@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { is256hex } from '../../utils/nostr';
 import IconLink from '../layout/IconLink/IconLink';
 import styles from './EventTags.module.scss';
@@ -33,24 +32,26 @@ export default function EventTags({ event }) {
   }
 
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th colSpan={maxCols}>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        { tags.map((tag, rowIndex) => (
-          <tr key={rowIndex}>
-            { tag.map((item, colIndex) => (
-              <td key={colIndex} colSpan={colIndex === tag.length - 1 && colIndex + 1 < maxCols ? maxCols - colIndex : 1}>
-                { renderItem(tag, item) }
-              </td>
-            ))}
+    <div className={styles.tags}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th colSpan={maxCols}>Value</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          { tags.map((tag, rowIndex) => (
+            <tr key={rowIndex}>
+              { tag.map((item, colIndex) => (
+                <td key={colIndex} colSpan={colIndex === tag.length - 1 && colIndex + 1 < maxCols ? maxCols - colIndex : 1}>
+                  { renderItem(tag, item) }
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
