@@ -6,9 +6,9 @@ export default function EventTags({ event }) {
   let { tags } = event;
 
   // for contact list,, filter out p tags as they are already shown in <Content />
-  if (event.kind === 3) {
-    tags = tags.filter(tag => tag[0] !== 'p')
-  }
+  // if (event.kind === 3) {
+  //   tags = tags.filter(tag => tag[0] !== 'p')
+  // }
 
   if (tags.length === 0) {
     return (

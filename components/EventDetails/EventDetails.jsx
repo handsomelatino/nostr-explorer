@@ -17,6 +17,7 @@ export default function EventDetails({ id, event, channelEvent }) {
   const [verifyTime, setVerifyTime] = useState(null);
   const [copiedJson, setCopiedJson] = useState(false);
   const [showJsonHelp, setShowJsonHelp] = useState(false);
+  const [npubFormat, setNpubformat] = useState(true);
 
   useEffect(() => {
     setVerifying(false);
@@ -24,7 +25,7 @@ export default function EventDetails({ id, event, channelEvent }) {
   }, [event]);
 
   const replyTo = useMemo(() => {
-    const eTags = event.tags.filter(tag => tag[0] === 'e');
+    const eTags = event?.tags.filter(tag => tag[0] === 'e');
     return eTags?.[1]?.[1] || undefined;
   }, [event]);
 
@@ -38,7 +39,7 @@ export default function EventDetails({ id, event, channelEvent }) {
   }, [event]);
 
   const eventJson = useMemo(() => JSON.stringify(event, null, 2), [event]);
-  const [createdAt, relativeTime] = useMemo(() => getEventTime(event.created_at), [event]);
+  const [createdAt, relativeTime] = useMemo(() => event ? getEventTime(event.created_at) : [], [event]);
 
   if (!event) {
     return (
@@ -124,9 +125,12 @@ export default function EventDetails({ id, event, channelEvent }) {
                 <div className={styles.help}><span>?</span></div>
               </div>
               <div>
-                <code className={styles.hash}>{ hexToNpub(event.pubkey) }</code>
+                <code className={styles.hash}>{ npubFormat ? hexToNpub(event.pubkey) : event.pubkey }</code>
                 <IconLink href={`/p/${hexToNpub(event.pubkey)}`} />
               </div>
+              <button className={classNames(styles.keyFormat, { [styles.smaller]: !npubFormat })} onClick={() => setNpubformat(!npubFormat)}>
+                { npubFormat ? 'HEX' : 'npub' }
+              </button>
             </div>
 
             <div className={styles.infoRow}>
@@ -136,7 +140,7 @@ export default function EventDetails({ id, event, channelEvent }) {
               </div>
 
               <div>
-                <span className={styles.label}>Type</span>
+                <span className={styles.label}>Kind</span>
                 <span>{ EventNames[event.kind] || '' }</span>
                 <span className={styles.kindNumber}>{ event.kind }</span>
               </div>
